@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">City ID</th>
+                        <th scope="col">City Name</th>
+                        <th scope="col">Coutry Name</th>
+                        <th scope="col">
+                            <button class="btn btn-primary">
+                                <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cities">
+                        <th scope="row">{{item.cityID}}</th>
+                        <td>{{item.cityName}}</td>
+                        <td>{{item.countryName}}</td>
+                        <td><button class="btn btn-primary"><i class="bi bi-pencil-fill"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
