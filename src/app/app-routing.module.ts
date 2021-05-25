@@ -4,9 +4,21 @@ import { ContentLayoutComponent } from './layout/content-layout/content-layout.c
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: ContentLayoutComponent,
-    children:[]
+    children:
+      [
+        {
+          path: 'settings',
+          loadChildren: () =>
+            import('./modules/settings/settings.module').then(m => m.SettingsModule)
+        },
+        {
+          path: 'weather',
+          loadChildren: () =>
+            import('./modules/weather/weather.module').then(m => m.WeatherModule)
+        }
+      ]
   }
 ];
 

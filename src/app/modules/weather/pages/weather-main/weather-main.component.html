@@ -1,0 +1,33 @@
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <form class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormInputGroupUsername">City</label>
+                <div class="input-group">
+                    <select class="form-select form-select-sm" [(ngModel)]="city" name="firstField">
+                        <option *ngFor="let item of cities " [ngValue]="item ">{{item.cityName}}</option>
+                      </select>
+                </div>
+            </div>
+            <div class="col-12 ">
+                <div class="form-check ">
+                    <input class="form-check-input " type="checkbox " id="inlineFormCheck ">
+                    <label class="form-check-label " for="inlineFormCheck ">
+                  Get Historical
+                </label>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary " (click)="getWeather() ">Get Weather</button>
+            </div>
+        </form>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="well">
+            <strong>Ciudad: </strong> {{city.cityName}}
+            <br>
+            <strong>Clima: </strong> {{temp}} °C
+            <strong>Sensación Térmica: </strong>{{feelsLike}} °C
+        </div>
+    </div>
+</div>
