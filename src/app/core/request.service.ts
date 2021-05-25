@@ -32,6 +32,23 @@ export class RequestService {
     return this.request<T>(options);
   }
 
+  ExternalGet<T>(url: string, params?: HttpParams, headers?: HttpHeaders): Observable<T> {
+    const options = new RequestOptions({ method: 'GET', url, params, headers });
+    return this.ExternalRequest<T>(options);
+  }
+
+  private ExternalRequest<T>(options: RequestOptions): Observable<T> {
+    options.headers = options.headers || new HttpHeaders();
+    options.params = options.params || new HttpParams();
+    return this.http.request<T>(options.method, options.url, options)
+      .pipe(
+        tap(
+          next => { },
+          error => this.handleErrors(error)
+        )
+      );
+  }
+
   private request<T>(options: RequestOptions): Observable<T> {
     options.headers = options.headers || new HttpHeaders();
     options.params = options.params || new HttpParams();
