@@ -13,4 +13,7 @@ export class CountriesService {
   getAll(): Observable<CountryModel[]>{
     return this.requestService.get('countries');
   }
+  save(country: CountryModel): Observable<any> {
+    return this.requestService.post('countries', country);
+  }
 }

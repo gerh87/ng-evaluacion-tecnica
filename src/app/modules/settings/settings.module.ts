@@ -8,6 +8,11 @@ import { CitiesComponent } from './pages/cities/cities.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserModule } from '@angular/platform-browser';
 import { PaginatePipe } from 'src/app/pipes/paginate.pipe';
+import { CountryFormComponent } from './pages/country-form/country-form.component';
+import { FormsModule } from '@angular/forms';
+import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CityFormComponent } from './pages/city-form/city-form.component';
+
 
 
 
@@ -18,12 +23,16 @@ import { PaginatePipe } from 'src/app/pipes/paginate.pipe';
     SettingsMainComponent,
     CountriesComponent,
     CitiesComponent,
-    PaginatePipe
+    PaginatePipe,
+    CountryFormComponent,
+    CityFormComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     SettingsRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbModalModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

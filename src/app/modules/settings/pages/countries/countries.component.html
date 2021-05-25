@@ -7,7 +7,7 @@
                         <th scope="col">Country ID</th>
                         <th scope="col">Country Name</th>
                         <th scope="col">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-lg"></i>
                         </button>
                         </th>
@@ -28,7 +28,7 @@
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li class="page-item" *ngFor="let item of countries; let i=index">
+                    <li class="page-item" *ngFor="let item of pageArray ; let i=index">
                         <a class="page-link" (click)="changePage(i)">{{i+1}}</a>
                     </li>
                     <li class="page-item">
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+<app-country-form></app-country-form>
