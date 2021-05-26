@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-6">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">City ID</th>
+                        <th scope="col">City Name</th>
+                        <th scope="col">Coutry Name</th>
+                        <th scope="col">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cities | paginate:page_size:page_number">
+                        <th scope="row">{{item.cityID}}</th>
+                        <td>{{item.cityName}}</td>
+                        <td>{{item.countryName}}</td>
+                        <td><button class="btn btn-primary" disabled><i class="bi bi-pencil-fill"></i></button></td>
+                        <td><button class="btn btn-danger" disabled><i class="bi bi-trash-fill"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" (click)="previus()" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let item of pageArray ; let i=index">
+                        <a class="page-link" (click)="changePage(i)">{{i+1}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" (click)="next()" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<app-city-form></app-city-form>
