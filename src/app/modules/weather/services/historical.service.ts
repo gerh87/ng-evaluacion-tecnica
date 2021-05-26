@@ -13,7 +13,7 @@ export class HistoricalService {
     return this.requestService.post('historicals', historical);
   }
 
-  getHistoricalsByCity(cityId: number): Observable<any[]> {
+  getHistoricalsByCity(cityId: number | undefined): Observable<any[]> {
     return this.requestService.get('historicals/' + cityId);
   }
 }

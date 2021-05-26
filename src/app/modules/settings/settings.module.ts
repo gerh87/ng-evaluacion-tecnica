@@ -12,6 +12,7 @@ import { CountryFormComponent } from './pages/country-form/country-form.componen
 import { FormsModule } from '@angular/forms';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CityFormComponent } from './pages/city-form/city-form.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -23,7 +24,6 @@ import { CityFormComponent } from './pages/city-form/city-form.component';
     SettingsMainComponent,
     CountriesComponent,
     CitiesComponent,
-    PaginatePipe,
     CountryFormComponent,
     CityFormComponent
   ],
@@ -32,7 +32,8 @@ import { CityFormComponent } from './pages/city-form/city-form.component';
     FormsModule,
     SettingsRoutingModule,
     NgxSpinnerModule,
-    NgbModalModule
+    NgbModalModule,
+    SharedModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RequestService } from 'src/app/core/request.service';
 import { CityModel } from 'src/app/data/city-model';
@@ -11,10 +11,16 @@ export class CitiesService {
 
   constructor(private requestService: RequestService) { }
 
-  getAll(): Observable<any[]>{
+  getAll(): Observable<any[]> {
     return this.requestService.get('cities');
   }
   save(city: CityModel): Observable<any> {
     return this.requestService.post('cities', city);
+  }
+  update(city: CityModel): Observable<any> {
+    return this.requestService.put('cities/' + city.cityID, city);
+  }
+  delete(cityId: number | undefined): Observable<any> {
+    return this.requestService.delete('cities/' + cityId);
   }
 }

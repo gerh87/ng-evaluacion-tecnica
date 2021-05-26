@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CityModel } from 'src/app/data/city-model';
+import { HistoricalInfoModel } from 'src/app/data/historical-info-model';
 import { HistoricalModel } from 'src/app/data/historical-model';
 import { CitiesService } from 'src/app/modules/settings/services/cities.service';
 import { HistoricalService } from '../../services/historical.service';
@@ -13,7 +14,16 @@ import { WeatherService } from '../../services/weather.service';
 })
 export class WeatherMainComponent implements OnInit {
 
+  // tslint:disable-next-line:variable-name
+  page_size = 5;
+  // tslint:disable-next-line:variable-name
+  page_number = 1;
+  // tslint:disable-next-line:variable-name
+  page_count = 0;
+  pageArray: Array<any> = [];
   cities: Array<CityModel> = [];
+  inHistorical = false;
+  historicals: Array<HistoricalInfoModel> = [];
   city: CityModel = new CityModel();
   weatherService: WeatherService;
   citiesService: CitiesService;
@@ -42,9 +52,10 @@ export class WeatherMainComponent implements OnInit {
       this.historical.cityId = this.city.cityID;
       this.historical.temperature = parseFloat(this.temp);
       this.historical.thermalSensation = parseFloat(this.feelsLike);
-
+      if (this.inHistorical) {
+        this.loadHistorical();
+      }
       this.historicalService.save(this.historical).subscribe((responseSaveHistorical) => {
-        console.log(responseSaveHistorical);
       });
 
       this.spinner.hide();
@@ -59,4 +70,32 @@ export class WeatherMainComponent implements OnInit {
     });
   }
 
+  loadHistorical(): void {
+    this.pageArray = [];
+    this.historicalService.getHistoricalsByCity(this.city.cityID)
+      .subscribe((historicalResponse) => {
+        this.historicals = historicalResponse;
+        this.page_count = this.historicals.length / this.page_size;
+        this.counter(this.page_count);
+      });
+  }
+  previus(): void {
+    if (this.page_number !== 1) {
+      this.page_number = this.page_number - 1;
+    }
+  }
+  next(): void {
+    if (this.page_number < this.pageArray.length) {
+      this.page_number = this.page_number + 1;
+    }
+  }
+  changePage(index: any): void {
+    this.page_number = index + 1;
+  }
+
+  counter(count: number): void {
+    for (let i = 0; i < count; i++) {
+      this.pageArray.push(i);
+    }
+  }
 }
