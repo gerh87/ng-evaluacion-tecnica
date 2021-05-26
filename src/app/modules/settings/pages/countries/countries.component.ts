@@ -34,9 +34,7 @@ export class CountriesComponent implements OnInit {
     this.countriesService.getAll().subscribe((response) => {
       this.countries = response;
       this.page_count = this.countries.length / this.page_size;
-      console.log(this.page_count);
       this.counter(this.page_count);
-      console.log(this.pageArray);
       this.spinner.hide();
     });
   }

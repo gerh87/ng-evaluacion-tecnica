@@ -1,33 +1,80 @@
 <div class="container" style="margin-top: 20px;">
     <div class="row">
-        <form class="row row-cols-lg-auto g-3 align-items-center">
-            <div class="col-12">
-                <label class="visually-hidden" for="inlineFormInputGroupUsername">City</label>
-                <div class="input-group">
-                    <select class="form-select form-select-sm" [(ngModel)]="city" name="firstField">
-                        <option *ngFor="let item of cities " [ngValue]="item ">{{item.cityName}}</option>
-                      </select>
+        <form class="row">
+            <div class="col">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" [(ngModel)]="city" name="city" aria-label="Floating label select example">
+                          <option *ngFor="let item of cities " [ngValue]="item ">
+                              <i class="cutom-item">{{item.cityName}}</i>
+                            </option>
+                        </select>
+                    <label for="floatingSelect">Choose a city</label>
                 </div>
             </div>
-            <div class="col-12 ">
+            <div class="col">
                 <div class="form-check ">
-                    <input class="form-check-input " type="checkbox " id="inlineFormCheck ">
-                    <label class="form-check-label " for="inlineFormCheck ">
-                  Get Historical
+                    <input class="form-check-input " [(ngModel)]="inHistorical" type="checkbox" id="checkHistorical" name="checkHistorical">
+                    <label class="form-check-label ">
+                  <strong>Include Historical</strong>
                 </label>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col">
                 <button class="btn btn-primary " (click)="getWeather() ">Get Weather</button>
             </div>
         </form>
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="well">
-            <strong>Ciudad: </strong> {{city.cityName}}
+            <strong>Ciudad: </strong> {{city.cityName}}, {{city.countryName}}
             <br>
             <strong>Clima: </strong> {{temp}} °C
             <strong>Sensación Térmica: </strong>{{feelsLike}} °C
         </div>
     </div>
 </div>
+<div class="container" style="margin-top: 10px;">
+    <div class="row justify-content-md-center">
+        <div class="col col-lg-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">City Name</th>
+                        <th scope="col">Coutry Name</th>
+                        <th scope="col">Temperature</th>
+                        <th scope="col">Thermal Sensation</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of historicals | paginate:page_size:page_number">
+                        <td>{{item.cityName}}</td>
+                        <td>{{item.countryName}}</td>
+                        <td>{{item.temperature}}°C</td>
+                        <td>{{item.thermalSensation}}°C</td>
+                        <td>{{item.createDate | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" (click)="previus()" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let item of pageArray ; let i=index">
+                        <a class="page-link" (click)="changePage(i)">{{i+1}}</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" (click)="next()" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<ngx-spinner></ngx-spinner>
