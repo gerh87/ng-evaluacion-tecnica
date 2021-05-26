@@ -24,10 +24,12 @@
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="well">
-            <strong>Ciudad: </strong> {{city.cityName}}
+            <strong>Ciudad: </strong> {{city.cityName}}, {{city.countryName}}
             <br>
             <strong>Clima: </strong> {{temp}} °C
             <strong>Sensación Térmica: </strong>{{feelsLike}} °C
         </div>
     </div>
 </div>
+<app-historical></app-historical>
+<ngx-spinner></ngx-spinner>
